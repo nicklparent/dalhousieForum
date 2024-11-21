@@ -1,0 +1,31 @@
+<?php
+// Db_connect functionality
+require_once "config.php";
+class DB {
+    private $dbConn;
+    public function __construct() {
+        $this->dbConn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        if ($this->dbConn->connect_error) {
+            die("Connection failed: " . $this->dbConn->connect_error);
+        }
+    }
+
+    public function selectData($parameters, $table, $conditions = null){
+        $query = "SELECT $parameters FROM $table";
+        if ($conditions) {
+            $query .= " WHERE $conditions";
+        }
+        $sql = $this->dbConn->query($query);
+        if ($sql->num_rows < 0) {
+            return json_encode(["Error" => "No results found"]);
+        }
+        return $sql->fetch_assoc();
+    }
+    public function insertData($tableName, $keys, $values){
+        $sql = "INSERT INTO $tableName ($keys) VALUES ($values)";
+        $res = $this->dbConn->query($sql);
+        return json_encode($res);
+    }
+
+}
+?>
