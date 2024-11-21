@@ -23,4 +23,6 @@ Write the response to this section in bullet points.
 1. Boostrap used for styling
 -[bootstrap] (https://getbootstrap.com/docs/5.3/getting-started/introduction/)
 2. Bootstrap header
-[Bootstrap header] https://getbootstrap.com/docs/5.3/examples/headers/
+[Bootstrap header] (https://getbootstrap.com/docs/5.3/examples/headers/)
+3. Dal Logo image
+[Dal Logo Image] (https://www.globaladmissions.com/university/dalhousie-university/)

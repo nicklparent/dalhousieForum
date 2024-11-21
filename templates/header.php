@@ -10,7 +10,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dalhousie Forum</title>
-    <Link href="/assets/styles.css" rel="stylesheet">
+    <Link href="assets/styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
@@ -22,7 +22,7 @@
     <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
         <div class="d-flex">
             <a href="index.php" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
-                <img class="bi me-2" width="40" height="32" src="assets/images/logo.png">
+                <img class="bi me-2" width="45" height="45" src="assets/images/logo.png">
                 <h4 class="text-bold">Dalhousie Forum</h4>
             </a>
         </div>
@@ -36,11 +36,17 @@
                 <?php
                     if (isset($_SESSION['logged_in'])) {
                     ?>
-
+                        <image src="assets/images/profile.png" alt="profile">
+                    <?php
+                    } else {
+                    ?>
+                            <div class="container justify-content-center">
+                                <a class="btn btn-primary"> Login In</a>
+                            </div>
                     <?php
                     }
                 ?>
-                ?>
+
             </div>
         </div>
     </div>
