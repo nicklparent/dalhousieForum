@@ -1,5 +1,6 @@
 // JavaScript functionality for Dalhousie Forum
 if (document.querySelector("#login-link") !== null){
+    console.log("found")
     document.querySelector("#login-link").addEventListener("click", (event) => {
        event.preventDefault();
 

@@ -19,7 +19,7 @@ class DB {
         if (!$sql){
             return json_encode(["Error" => "Query Failed" . $this->dbConn->error]);
         }
-        if ($sql->num_rows < 0) {
+        if ($sql->num_rows === 0) {
             return json_encode(["Error" => "No results found"]);
         }
         return $sql->fetch_all(MYSQLI_ASSOC);

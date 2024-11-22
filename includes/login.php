@@ -13,9 +13,9 @@ $loggedIn = false;
 
 if ($userName && $password) {
 
-    $result = $mydb->selectData("*", "users", "username = {$userName}");
+    $result = $mydb->selectData("username, password", "users", "username = {$userName}");
     if (!isset($result["Error"])) {
-        if (password_verify($password, $result["Password"])) {
+        if (password_verify($password, $result["password"])) {
             $_SESSION["loggedIn"] = true;
             $_SESSION["userName"] = $result["Username"];
 
