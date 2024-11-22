@@ -34,7 +34,7 @@
         </div>
             <?php
                 // change to ! not logged in after sign in is done
-                if (isset($_SESSION['logged_in'])) {
+                if (!isset($_SESSION['logged_in'])) {
                 ?>
                     <!-- Signed out view -->
                     <a id="login-link" href="">Login</a>
@@ -47,6 +47,7 @@
                             <a class="navbar-brand fs-xs btn bg-dark-subtle m-1" href="index.php">Home</a>
                             <a class="navbar-brand fs-xs btn bg-dark-subtle m-1" href="new-post.php">New Post</a>
                             <a class="navbar-brand fs-xs btn bg-dark-subtle m-1" href="messages.php">Messages</a>
+                            <a class="navbar-brand fs-xs btn btn-primary bg-dark-subtle m-1" href="includes/logout.php">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -55,9 +56,14 @@
             ?>
     </div>
 </header>
-<aside class="login-container" style="display: <?php echo isset($_GET['loginerror']) ? '': 'none';?>;">
+<!--Heavily inspired by the login appearence of november 21st in class work
+[November 21st In lecture Activity] https://dal.brightspace.com/d2l/le/content/342736/viewContent/4598210/View
+-->
+<aside id="login-container" class="login-container <?php echo isset($_GET['loginerror']) ? 'show' :'hide';?>">
     <form action="includes/login.php" method="post">
-
+        <input placeholder="Username" name="userName" id="userName-input" type="text">
+        <input placeholder="Password" name="password" id="password-input" type="password">
+        <input type="submit" id="login-btn">
     </form>
 </aside>
 <main class="bg-dark">

@@ -20,14 +20,14 @@ if ($userName && $password) {
             $_SESSION["userName"] = $result["Username"];
 
             $loggedIn = true;
-            header("location: index.php", true, 302);
+            header("location: ../index.php", true, 302);
             die();
         }
     }
 }
 
 if (!$loggedIn) {
-    header("Location: index.php?loginerror", true, 302);
+    header("Location: ../index.php?loginerror", true, 302);
     die();
 }
 ?>

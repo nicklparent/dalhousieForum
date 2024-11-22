@@ -30,3 +30,6 @@ Write the response to this section in bullet points.
 [Home png] (https://www.flaticon.com/free-icon/home_25694)
 5. Boostrap Sidebar
 [bootstrap sidebars] (https://getbootstrap.com/docs/5.3/examples/sidebars/)
+6. Sign in DropDown
+[November 21st In lecture Activity] (https://dal.brightspace.com/d2l/le/content/342736/viewContent/4598210/View)
+7. 
