@@ -4,10 +4,8 @@
 
 ?>
 
-<div class="container d-flex flex-row">
-    <div class="post-list" id="post-list">
+<div class="d-flex flex-column align-items-center justify-content-center border container" style="width: 70%" id="post-list">
 
-    </div>
 </div>
 <script>
     const postList = document.querySelector("#post-list");
@@ -17,6 +15,13 @@
         console.log(data);
         data.forEach(post => {
         //     add each post element
+            postList.innerHTML +=
+            `<div class="forum-post d-flex mb-2">
+                <div class="d-flex justify-content-between border-bottom post-header">
+                    <p>${post[2]}</p>
+                    <p>${post[4]}</p>
+                </div>
+            </div>`
         })
     })
     .catch(err => console.error(err))
@@ -25,6 +30,3 @@
     }
 </script>
 
-<div class="forum-post">
-
-</div>

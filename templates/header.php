@@ -54,4 +54,4 @@
         </div>
     </div>
 </header>
-<main class="d-flex justify-content-center border container" style="width: 70%">
+<main>

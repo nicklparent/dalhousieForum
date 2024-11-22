@@ -7,6 +7,12 @@
     margin: 10%;
 }
 .forum-post{
+    width: 50%;
     display: flex;
-    border: 100px solid blue;
+    border: 1px solid darkblue;
+    border-radius: 0.6rem;
+}
+.post-header{
+    flex: 1;
+    margin: 1%;
 }

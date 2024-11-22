@@ -6,3 +6,5 @@
 <footer>
 
 </footer>
+<script src="assets/script.js">
+</body>
