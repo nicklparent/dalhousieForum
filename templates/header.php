@@ -13,7 +13,7 @@
     <Link href="assets/styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body>
+<body class="bg-dark">
 
 <!--
 [Bootstrap header] https://getbootstrap.com/docs/5.3/examples/headers/
@@ -36,8 +36,7 @@
                 // change to ! not logged in after sign in is done
                 if (!isset($_SESSION['logged_in'])) {
                 ?>
-                    <!-- Signed out view -->
-                    <a id="login-link" href="">Login</a>
+                    <a id="login-link" href="" class="btn btn-primary">Login</a>
                 <?php
                 } else {
                 ?>
@@ -66,4 +65,4 @@
         <input type="submit" id="login-btn">
     </form>
 </aside>
-<main class="bg-dark">
+<main>

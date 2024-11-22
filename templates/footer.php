@@ -3,7 +3,7 @@
 ?>
 
 </main>
-<footer class="d-flex flex-wrap justify-content-between align-items-center p-2 border-top">
+<footer class="d-flex flex-wrap justify-content-between align-items-center p-2 border-top bg-gradient pg-footer">
     <p>&copy; Dalhousie Forum 2024</p>
     <img class="bi me-2" width="45" height="45" src="assets/images/logo.png">
     <?php
