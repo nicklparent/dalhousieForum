@@ -26,5 +26,5 @@
         }
     ?>
 </footer>
-<script src="assets/script.js">
+<script src="assets/scripts.js">
 </body>
