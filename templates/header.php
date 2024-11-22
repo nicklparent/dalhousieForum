@@ -37,6 +37,7 @@
                 if (isset($_SESSION['logged_in'])) {
                 ?>
                     <!-- Signed out view -->
+                    <a id="login-link" href="">Login</a>
                 <?php
                 } else {
                 ?>
@@ -48,10 +49,15 @@
                             <a class="navbar-brand fs-xs btn bg-dark-subtle m-1" href="messages.php">Messages</a>
                         </div>
                     </div>
+                </div>
                 <?php
                 }
             ?>
-        </div>
     </div>
 </header>
-<main>
+<aside class="login-container" style="display: <?php echo isset($_GET['loginerror']) ? '': 'none';?>;">
+    <form action="includes/login.php" method="post">
+
+    </form>
+</aside>
+<main class="bg-dark">
