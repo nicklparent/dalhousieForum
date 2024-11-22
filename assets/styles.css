@@ -6,4 +6,7 @@
     width: 24px;
     margin: 10%;
 }
-
+.forum-post{
+    display: flex;
+    border: 100px solid blue;
+}

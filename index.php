@@ -16,7 +16,7 @@
     .then(data => {
         console.log(data);
         data.forEach(post => {
-            const entry = document.createElement("")
+        //     add each post element
         })
     })
     .catch(err => console.error(err))
@@ -25,12 +25,6 @@
     }
 </script>
 
-<div class="d-flex flex-column px-3">
-    <div class="d-flex align-item-center justify-content-between">
-        <p>${title}</p>
-        <p>${created}</p>
-    </div>
-    <div class="p-2">
+<div class="forum-post">
 
-    </div>
 </div>

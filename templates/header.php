@@ -18,7 +18,7 @@
 <!--
 [Bootstrap header] https://getbootstrap.com/docs/5.3/examples/headers/
 -->
-<header class="py-3 mb-3 border-bottom pg-header bg-gradient">
+<header class="py-3 border-bottom pg-header bg-gradient">
     <div class="container-fluid d-flex align-items-center justify-content-between" style="grid-template-columns: 1fr 2fr;">
         <div class="d-flex">
             <a href="index.php" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
@@ -33,6 +33,7 @@
             </form>
         </div>
             <?php
+                // change to ! not logged in after sign in is done
                 if (isset($_SESSION['logged_in'])) {
                 ?>
                     <!-- Signed out view -->
@@ -53,4 +54,4 @@
         </div>
     </div>
 </header>
-<main>
+<main class="d-flex justify-content-center border container" style="width: 70%">
