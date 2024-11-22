@@ -19,12 +19,16 @@ class DB {
         if ($sql->num_rows < 0) {
             return json_encode(["Error" => "No results found"]);
         }
-        return $sql->fetch_assoc();
+        return $sql->fetch_all();
     }
     public function insertData($tableName, $keys, $values){
         $sql = "INSERT INTO $tableName ($keys) VALUES ($values)";
         $res = $this->dbConn->query($sql);
         return json_encode($res);
+    }
+
+    public function getDbConn(){
+        return $this->dbConn;
     }
 
 }

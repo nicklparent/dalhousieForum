@@ -1,1 +1,9 @@
-/* Stylesheet for Dalhousie Forum */
+.pg-header{
+    background: rgba(57,57,56,0.93);
+}
+.nav-img{
+    height: auto;
+    width: 24px;
+    margin: 10%;
+}
+

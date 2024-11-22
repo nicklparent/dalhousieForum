@@ -18,36 +18,39 @@
 <!--
 [Bootstrap header] https://getbootstrap.com/docs/5.3/examples/headers/
 -->
-<header class="py-3 mb-3 border-bottom">
-    <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
+<header class="py-3 mb-3 border-bottom pg-header bg-gradient">
+    <div class="container-fluid d-flex align-items-center justify-content-between" style="grid-template-columns: 1fr 2fr;">
         <div class="d-flex">
-            <a href="index.php" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
+            <a href="index.php" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
                 <img class="bi me-2" width="45" height="45" src="assets/images/logo.png">
                 <h4 class="text-bold">Dalhousie Forum</h4>
             </a>
         </div>
 
         <div class="d-flex align-items-center">
-            <form class="w-100 me-3" role="search">
-                <input type="search" class="form-control" placeholder="Search..." aria-label="Search" wfd-id="id2">
+            <form class="ms-5" role="search">
+                <input type="search" class="form-control" placeholder="Search..." aria-label="Search" style="background: rgba(134,124,118,0.4)">
             </form>
-
-            <div class="corner">
-                <?php
-                    if (isset($_SESSION['logged_in'])) {
-                    ?>
-                        <image src="assets/images/profile.png" alt="profile">
-                    <?php
-                    } else {
-                    ?>
-                            <div class="container justify-content-center">
-                                <a class="btn btn-primary"> Login In</a>
-                            </div>
-                    <?php
-                    }
+        </div>
+            <?php
+                if (isset($_SESSION['logged_in'])) {
                 ?>
-
-            </div>
+                    <!-- Signed out view -->
+                <?php
+                } else {
+                ?>
+                <div class="corner">
+                    <div class="navbar">
+                        <div class="container">
+                            <a class="navbar-brand fs-xs btn bg-dark-subtle m-1" href="index.php">Home</a>
+                            <a class="navbar-brand fs-xs btn bg-dark-subtle m-1" href="new-post.php">New Post</a>
+                            <a class="navbar-brand fs-xs btn bg-dark-subtle m-1" href="messages.php">Messages</a>
+                        </div>
+                    </div>
+                <?php
+                }
+            ?>
         </div>
     </div>
 </header>
+<main>

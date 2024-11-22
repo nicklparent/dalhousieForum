@@ -26,3 +26,7 @@ Write the response to this section in bullet points.
 [Bootstrap header] (https://getbootstrap.com/docs/5.3/examples/headers/)
 3. Dal Logo image
 [Dal Logo Image] (https://www.globaladmissions.com/university/dalhousie-university/)
+4. Home image
+[Home png] (https://www.flaticon.com/free-icon/home_25694)
+5. Boostrap Sidebar
+[bootstrap sidebars] (https://getbootstrap.com/docs/5.3/examples/sidebars/)
