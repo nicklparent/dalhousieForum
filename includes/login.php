@@ -13,8 +13,7 @@ $loggedIn = false;
 
 if ($userName && $password) {
 
-    $result = $mydb->selectData("username, password", "users", "username = {$userName}");
-    echo $result;
+    $result = $mydb->selectData("username, password", "users", "username = '{$userName}'");
     $result = json_decode($result, true);
     if (!isset($result["Error"])) {
         if (password_verify($password, $result["password"])) {
@@ -23,8 +22,10 @@ if ($userName && $password) {
 
             $loggedIn = true;
             header("location: ../index.php", true, 302);
-            die();
+        } else {
+            header("location: ../index.php?invalidPassword", true, 302);
         }
+        die();
     }
 }
 

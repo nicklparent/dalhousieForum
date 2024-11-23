@@ -63,6 +63,9 @@
         <input placeholder="Username" name="userName" id="userName-input" type="text">
         <input placeholder="Password" name="password" id="password-input" type="password">
         <input type="submit" id="login-btn">
+        <?php
+            if (isset($_GET['invalidPassword'])) echo "<p class='error'>Invalid Password</p>";
+        ?>
     </form>
 </aside>
 <main>
