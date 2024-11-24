@@ -12,6 +12,7 @@
     <title>Dalhousie Forum</title>
     <Link href="assets/styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="icon" href="assets/images/logo.png" type="image/x-icon">
 </head>
 <body class="bg-dark">
 
@@ -37,6 +38,12 @@
                 if (!isset($_SESSION['logged_in'])) {
                 ?>
                     <a id="login-link" href="" class="btn btn-primary">Login</a>
+                    <!-- No text Wrap
+                    [No text wrap] (https://www.w3schools.com/cssref/css3_pr_text-overflow.php)
+                    -->
+                    <div  id ="create-account-link" style="text-overflow: ellipsis; white-space: nowrap">
+                        <a href="" class="btn btn-secondary btn-primary" style="max-height: 38px;"><p>Create Account </p></a>
+                    </div>
                 <?php
                 } else {
                 ?>
@@ -65,6 +72,21 @@
         <input type="submit" id="login-btn">
         <?php
             if (isset($_GET['invalidPassword'])) echo "<p class='error'>Invalid Password</p>";
+            if (isset($_GET['loginerror'])) echo "<p class='error'>Login Failed</p>";
+        ?>
+    </form>
+</aside>
+
+<!--Create Account Aside-->
+<aside id="create-account-container" class="login-container <?php echo isset($_GET['loginerror']) ? 'show' :'hide';?>">
+    <form action="includes/create_account.php" method="post">
+        <input placeholder="Username" name="userName" id="userName-create-input" type="text">
+        <input placeholder="Password" name="password" id="password-create-input" type="password">
+        <input placeholder=" Confirm Password" name="password-confirm" id="password-confirm-input" type="password">
+        <input type="submit" id="create-Account-btn">
+        <?php
+        if (isset($_GET['invalidPassword'])) echo "<p class='error'>Invalid Password</p>";
+        if (isset($_GET['loginerror'])) echo "<p class='error'>Login Failed</p>";
         ?>
     </form>
 </aside>

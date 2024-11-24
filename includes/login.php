@@ -14,11 +14,11 @@ $loggedIn = false;
 if ($userName && $password) {
 
     $result = $mydb->selectData("username, password", "users", "username = '{$userName}'");
-    $result = json_decode($result, true);
-    if (!isset($result["Error"])) {
-        if (password_verify($password, $result["password"])) {
+//    $result = json_decode($result, true);
+    if ($result && isset($result->password)) {
+        if (password_verify($password, $result->password)) {
             $_SESSION["loggedIn"] = true;
-            $_SESSION["userName"] = $result["Username"];
+            $_SESSION["userName"] = $result->password;
 
             $loggedIn = true;
             header("location: ../index.php", true, 302);

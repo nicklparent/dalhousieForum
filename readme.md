@@ -32,4 +32,5 @@ Write the response to this section in bullet points.
 [bootstrap sidebars] (https://getbootstrap.com/docs/5.3/examples/sidebars/)
 6. Sign in DropDown
 [November 21st In lecture Activity] (https://dal.brightspace.com/d2l/le/content/342736/viewContent/4598210/View)
-7. 
+7. Create Account Button
+[No text wrap] (https://www.w3schools.com/cssref/css3_pr_text-overflow.php)
