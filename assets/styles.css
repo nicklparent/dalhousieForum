@@ -47,3 +47,8 @@
     padding: 6px;
     font-weight: bolder;
 }
+.welcome{
+    font-weight: bold;
+    margin: 2px;
+    text-decoration: underline;
+}

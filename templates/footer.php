@@ -21,7 +21,7 @@
             <?php
         } else {
             ?>
-
+            <p class="m-2 fs-5" style="color: #5082e8">Login To Gain Full Access</p>
             <?php
         }
     ?>
