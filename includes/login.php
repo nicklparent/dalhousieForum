@@ -14,7 +14,6 @@ $loggedIn = false;
 if ($userName && $password) {
 
     $result = $mydb->selectData("username, password", "users", "username = '{$userName}'");
-//    $result = json_decode($result, true);
     if ($result && isset($result->password)) {
         if (password_verify($password, $result->password)) {
             $_SESSION["loggedIn"] = true;

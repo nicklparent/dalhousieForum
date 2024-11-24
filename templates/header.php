@@ -37,13 +37,15 @@
                 // change to ! not logged in after sign in is done
                 if (!isset($_SESSION['logged_in'])) {
                 ?>
-                    <a id="login-link" href="" class="btn btn-primary">Login</a>
-                    <!-- No text Wrap
-                    [No text wrap] (https://www.w3schools.com/cssref/css3_pr_text-overflow.php)
-                    -->
-                    <div  id ="create-account-link" style="text-overflow: ellipsis; white-space: nowrap">
-                        <a href="" class="btn btn-secondary btn-primary" style="max-height: 38px;"><p>Create Account </p></a>
-                    </div>
+                        <div class="d-flex gap-3">
+                            <a id="login-link" href="" class="btn btn-primary">Login</a>
+                            <!-- No text Wrap
+                            [No text wrap] (https://www.w3schools.com/cssref/css3_pr_text-overflow.php)
+                            -->
+                            <div  id ="create-account-link" style="text-overflow: ellipsis; white-space: nowrap">
+                                <a href="" class="btn btn-secondary btn-primary" style="max-height: 38px;"><p>Create Account </p></a>
+                            </div>
+                        </div>
                 <?php
                 } else {
                 ?>
@@ -78,7 +80,7 @@
 </aside>
 
 <!--Create Account Aside-->
-<aside id="create-account-container" class="login-container <?php echo isset($_GET['loginerror']) ? 'show' :'hide';?>">
+<aside id="create-account-container" class="login-container hide">
     <form action="includes/create_account.php" method="post">
         <input placeholder="Username" name="userName" id="userName-create-input" type="text">
         <input placeholder="Password" name="password" id="password-create-input" type="password">
@@ -86,7 +88,7 @@
         <input type="submit" id="create-Account-btn">
         <?php
         if (isset($_GET['invalidPassword'])) echo "<p class='error'>Invalid Password</p>";
-        if (isset($_GET['loginerror'])) echo "<p class='error'>Login Failed</p>";
+        if (isset($_GET['usernameTaken'])) echo "<p class='error'>Username Taken</p>";
         ?>
     </form>
 </aside>

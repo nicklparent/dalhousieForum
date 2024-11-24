@@ -17,7 +17,7 @@ class DB {
         }
         $sql = $this->dbConn->query($query);
         if (!$sql){
-            return json_encode(["Error" => "Query Failed" . $this->dbConn->error]);
+            return json_encode(["Error" => "Query Failed: " . $this->dbConn->error]);
         }
         if ($sql->num_rows === 0) {
             return json_encode(["Error" => "No results found"]);
