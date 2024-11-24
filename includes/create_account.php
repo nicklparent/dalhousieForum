@@ -25,7 +25,9 @@ if ($username && $password) {
             if ($password === $passwordConfirm) {
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                 $insert = $mydb->getDbConn()->query("INSERT INTO users (username, password) VALUES ('{$username}', '$hashedPassword')");
-                print_r($insert);
+                $_SESSION['loggedIn'] = true;
+                $_SESSION["userName"] = $username;
+                $created = true;
             } else {
                 header("Location: ../index.php?invalidPassword", true, 302);
                 die();
@@ -35,5 +37,10 @@ if ($username && $password) {
             die();
         }
     }
+}
+
+if (!$created) {
+    header("Location: ../index.php?loginerror", true, 302);
+    die();
 }
 ?>

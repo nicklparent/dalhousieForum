@@ -29,9 +29,9 @@ if ($userName && $password) {
         die();
     }
 }
-//
-//if (!$loggedIn) {
-//    header("Location: ../index.php?loginerror", true, 302);
-//    die();
-//}
-//?>
+
+if (!$loggedIn) {
+    header("Location: ../index.php?loginerror", true, 302);
+    die();
+}
+?>
