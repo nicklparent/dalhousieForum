@@ -13,10 +13,7 @@ class validater {
     private function injectionCheck($data){
 
     }
-
-    public function getValid(){
-        return $this->valid;
-    }
+    
 
 }
 ?>
