@@ -7,7 +7,7 @@
     <p>&copy; Dalhousie Forum 2024</p>
     <img class="bi me-2" width="45" height="45" src="assets/images/logo.png">
     <?php
-        if (!isset($_SESSION['logged_in'])) {
+        if (isset($_SESSION['loggedIn'])) {
             ?>
             <div class="corner">
                 <div class="navbar">

@@ -34,3 +34,5 @@ Write the response to this section in bullet points.
 [November 21st In lecture Activity] (https://dal.brightspace.com/d2l/le/content/342736/viewContent/4598210/View)
 7. Create Account Button
 [No text wrap] (https://www.w3schools.com/cssref/css3_pr_text-overflow.php)
+8. Php End session
+[PHP end session fully] (https://www.php.net/manual/en/function.session-destroy.php)

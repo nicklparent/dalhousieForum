@@ -30,6 +30,11 @@ class DB {
         return json_encode($res);
     }
 
+    public function updateData($tableName, $keys, $values, $conditions){
+        $sql = "UPDATE $tableName SET $keys=$values WHERE $conditions";
+        $res = $this->dbConn->query($sql);
+        return json_encode($res);
+    }
     public function getDbConn(){
         return $this->dbConn;
     }

@@ -14,8 +14,10 @@ $loggedIn = false;
 if ($userName && $password) {
 
     $result = $mydb->selectData("username, password", "users", "username = '{$userName}'");
-    if ($result && isset($result->password)) {
-        if (password_verify($password, $result->password)) {
+    print_r($result);
+    if ($result && isset($result[0]["password"])) {
+        if (password_verify($password, $result[0]["password"])) {
+            echo "here";
             $_SESSION["loggedIn"] = true;
             $_SESSION["userName"] = $result->password;
 
@@ -27,9 +29,9 @@ if ($userName && $password) {
         die();
     }
 }
-
-if (!$loggedIn) {
-    header("Location: ../index.php?loginerror", true, 302);
-    die();
-}
-?>
+//
+//if (!$loggedIn) {
+//    header("Location: ../index.php?loginerror", true, 302);
+//    die();
+//}
+//?>

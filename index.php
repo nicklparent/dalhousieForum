@@ -1,7 +1,7 @@
 <?php
     session_start();
     include_once "templates/header.php";
-    if (isset($_SESSION['loggedin']) && isset($_SESSION['user'])) {
+    if (isset($_SESSION['loggedIn']) && isset($_SESSION['userName'])) {
         echo "<h2>Welcome {$_SESSION['user']}</h2>";
     }
 ?>

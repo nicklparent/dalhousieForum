@@ -1,24 +1,39 @@
 <?php
+function cleanData($string){
+    $string = htmlspecialchars($string);
+    $string = trim($string);
+    $string = stripslashes($string);
+    return $string;
+}
 session_start();
 
 require_once "db_connect.php";
 
 $mydb = new DB();
 
-$username = $_POST['userName'];
-$password = $_POST['password'];
-$passwordConfirm = $_POST["password-confirm"];
+$username = cleanData($_POST['userName']);
+$password = cleanData($_POST['password']);
+$passwordConfirm = cleanData($_POST["password-confirm"]);
 
 $created = false;
 
-if ($username && $password && $password === $passwordConfirm) {
+if ($username && $password) {
     $usercheck = $mydb->selectData("username", "users", "username = '{$username}'");
+    $usercheck = json_decode($usercheck, true);
     if (isset($usercheck["Error"])) {
         if ($usercheck["Error"] === "No results found") {
-
+            if ($password === $passwordConfirm) {
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                $insert = $mydb->getDbConn()->query("INSERT INTO users (username, password) VALUES ('{$username}', '$hashedPassword')");
+                print_r($insert);
+            } else {
+                header("Location: ../index.php?invalidPassword", true, 302);
+                die();
+            }
+        } else {
+            header("Location ../index.php?usernameTaken", true, 302);
+            die();
         }
-    } else {
-        header("Location ../index.php?usernameTaken", true, 302);
     }
 }
 ?>

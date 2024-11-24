@@ -35,7 +35,7 @@
         </div>
             <?php
                 // change to ! not logged in after sign in is done
-                if (!isset($_SESSION['logged_in'])) {
+                if (!isset($_SESSION['loggedIn'])) {
                 ?>
                         <div class="d-flex gap-3">
                             <a id="login-link" href="" class="btn btn-primary">Login</a>
