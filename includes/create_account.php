@@ -42,5 +42,7 @@ if ($username && $password) {
 if (!$created) {
     header("Location: ../index.php?loginerror", true, 302);
     die();
+} else {
+    header("Location: ../index.php?loginsuccess", true, 302);
 }
 ?>
