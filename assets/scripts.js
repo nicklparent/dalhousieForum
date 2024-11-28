@@ -51,6 +51,15 @@ const postList = document.querySelector("#post-list");
                 </div>`
             })
         })
-        .catch(err => console.error(err))
-
+        .catch(err => console.error(err));
 }
+
+    if (document.querySelector(".message-list") !== null){
+        const messageList = document.querySelector("message-list");
+        fetch("api/messages.php")
+        .then(res => res.json())
+        // .then(data => {
+        //     console.log(data);
+        // })
+        .catch(err => console.error(err));
+    }

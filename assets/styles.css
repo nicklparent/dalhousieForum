@@ -52,3 +52,7 @@
     margin: 2px;
     text-decoration: underline;
 }
+
+.message-list{
+    height: 100px;
+}

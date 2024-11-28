@@ -13,13 +13,13 @@ $loggedIn = false;
 
 if ($userName && $password) {
 
-    $result = $mydb->selectData("username, password", "users", "username = '{$userName}'");
-    print_r($result);
+    $result = $mydb->selectData("id, username, password", "users", "username = '{$userName}'");
     if ($result && isset($result[0]["password"])) {
         if (password_verify($password, $result[0]["password"])) {
             echo "here";
             $_SESSION["loggedIn"] = true;
             $_SESSION["userName"] = $result->password;
+            $_SESSION["userID"] = $result[0]["id"];
 
             $loggedIn = true;
             header("location: ../index.php", true, 302);
