@@ -3,8 +3,10 @@
 session_start();
 require "../includes/db_connect.php";
 $mydb = new DB();
-
 header('Content-Type: application/json');
+
+$type = json_decode(file_get_contents("php://input"), true);
+
 $id = $_SESSION["userID"];
 $sql = "SELECT sender_id FROM messages WHERE receiver_id = {$id} ORDER BY timestamp DESC";
 $result = $mydb->getDbConn()->query($sql);

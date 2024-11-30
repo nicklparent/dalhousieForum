@@ -55,11 +55,12 @@ const postList = document.querySelector("#post-list");
 }
 
     if (document.querySelector(".message-list") !== null){
+        console.log("found");
         const messageList = document.querySelector("message-list");
         fetch("api/messages.php")
         .then(res => res.json())
-        // .then(data => {
-        //     console.log(data);
-        // })
+        .then(data => {
+            console.log(data);
+        })
         .catch(err => console.error(err));
     }
