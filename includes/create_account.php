@@ -32,7 +32,7 @@ if ($username && $password) {
         header("Location: ../index.php?invalidUsername", true, 302);
         die();
     }
-    $usercheck = $mydb->selectData("username", "users", "username = '{$username}'");
+    $usercheck = $mydb->selectData("username, id", "users", "username = '{$username}'");
     $usercheck = json_decode($usercheck, true);
     if (!preg_match($regPassword, $password)) {
         header("Location: ../index.php?invalidPassword", true, 302);

@@ -54,32 +54,24 @@ const postList = document.querySelector("#post-list");
         .catch(err => console.error(err));
 }
 
-if (document.querySelector(".message-list") !== null){
-    const messageList = document.querySelector("message-list");
-    fetch("api/messages.php")
-    .then(res => res.json())
-    .then(data => {
-        data.forEach(message => {
-            messageList.innerHTML += `
-                
-            `
-        })
-    })
-    .catch(err => console.error(err));
-}
-
 if (document.querySelector(".user-list") !== null){
     const userList = document.querySelector(".user-list");
     fetch("api/users.php")
     .then(res => res.json())
     .then(data => {
         data.forEach(user => {
+            let content;
+            if (user.content == null){
+                content = "Start the conversation!";
+            } else {
+                content = user.content;
+            }
             userList.innerHTML += `
                 <div class="flex-1 d-flex flex-row align-items-start user" onclick="displayMessage(${user.id})">
                     <img src="assets/images/profile.png" alt="user icon" height="50" width="50" class="rounded-circle">
                     <div class="d-flex flex-column flex-1 user-body">
                         <h5 class="mb-1">${user.username}</h5>
-                        <p class="mb-0">${user.content}</p>
+                        <p class="mb-0">${content}</p>
                     </div>
                 </div>
             `
@@ -95,8 +87,6 @@ if (document.querySelector("#users-return") !== null) {
     });
 }
 function displayMessage(userId) {
-    console.log(userId);
-
     // Check if the user list is currently showing and change accordingly
     if (document.querySelector("#user-display").classList.contains("show")) {
         // do the changing
@@ -110,6 +100,28 @@ function displayMessage(userId) {
         document.querySelector("#message-display").classList.remove("show");
         document.querySelector("#message-display").classList.add("hide");
     }
+
+    fetch("api/messages.php", {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({"senderId": userId})
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data)
+        // const messageList = document.querySelector(".message-list");
+        // data.forEach(message => {
+        //     messageList.innerHTML += `
+        //     <div class="message">
+        //       <p class="message-content">${message.content}</p>
+        //       <p class="fs-xs">${message.timestamp}</p>
+        //     </div>
+        // `
+        // })
+    })
+    .catch(err => console.error(err))
 }
 
 

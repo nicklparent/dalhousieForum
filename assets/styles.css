@@ -75,6 +75,11 @@
 }
 
 .message{
+    flex: 1;
+    margin-right: 5%;
     border: 2px solid navy;
     border-radius: 25%;
+}
+.message-content{
+    font-size: medium;
 }

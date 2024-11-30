@@ -22,12 +22,7 @@ require_once "templates/header.php";
         <a class="btn btn-secondary" id="users-return"><p>Back To Users</p></a>
     </div>
 </div>
-
 <?php
 require_once "templates/footer.php";
 ?>
 
-
-<div class="message">
-    <p class="message-content">${data}</p>
-</div>
