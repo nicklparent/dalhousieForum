@@ -12,8 +12,12 @@ if (!isset($_SESSION["loggedIn"])) {
 require_once "templates/header.php";
 ?>
 
-<div class="message-list d-flex flex-column">
+<div class="user-list d-flex flex-column container show">
 
+</div>
+
+<div class="message-list d-flex flex-column container <?php echo isset($_GET['user']) ? 'show' : ' hide'; ?>">
+    <p style="color: white">Hello World</p>
 </div>
 
 <?php

@@ -54,13 +54,32 @@ const postList = document.querySelector("#post-list");
         .catch(err => console.error(err));
 }
 
-    if (document.querySelector(".message-list") !== null){
-        console.log("found");
-        const messageList = document.querySelector("message-list");
-        fetch("api/messages.php")
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
+if (document.querySelector(".message-list") !== null){
+    const messageList = document.querySelector("message-list");
+    fetch("api/messages.php")
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(err => console.error(err));
+}
+
+if (document.querySelector(".user-list") !== null){
+    const userList = document.querySelector(".user-list");
+    fetch("api/users.php")
+    .then(res => res.json())
+    .then(data => {
+        data.forEach(user => {
+            userList.innerHTML += `
+                <div class="d-flex flex-row gap-2 align-items-start user">
+                    <img src="assets/images/profile.png" alt="user icon" height="50" width="50" class="rounded-circle">
+                    <div class="d-flex flex-column flex-1 user-body">
+                        <h5 class="mb-1">${user.username}</h5>
+                        <p class="mb-0">${user.content}</p>
+                    </div>
+                </div>
+            `
         })
-        .catch(err => console.error(err));
-    }
+    })
+}
+

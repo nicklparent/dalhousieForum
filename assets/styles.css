@@ -56,3 +56,14 @@
 .message-list{
     height: 100px;
 }
+.user-list{
+    background: rgba(47,47,94,0.93);
+}
+.user{
+    padding: 1%;
+    background: rgba(80,87,177,0.93);
+    border-radius: 6px;
+    height: 2rem;
+    margin: 0.4rem;
+    flex: 1;
+}
