@@ -66,4 +66,15 @@
     height: 2rem;
     margin: 0.4rem;
     flex: 1;
+    background-size: cover;
+    transition: .04s;
+}
+.user:hover{
+    margin-bottom: 20px;
+    box-shadow: 20px 20px #1c2d44;
+}
+
+.message{
+    border: 2px solid navy;
+    border-radius: 25%;
 }

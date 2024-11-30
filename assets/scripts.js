@@ -59,7 +59,11 @@ if (document.querySelector(".message-list") !== null){
     fetch("api/messages.php")
     .then(res => res.json())
     .then(data => {
-        console.log(data);
+        data.forEach(message => {
+            messageList.innerHTML += `
+                
+            `
+        })
     })
     .catch(err => console.error(err));
 }
@@ -71,7 +75,7 @@ if (document.querySelector(".user-list") !== null){
     .then(data => {
         data.forEach(user => {
             userList.innerHTML += `
-                <div class="d-flex flex-row gap-2 align-items-start user">
+                <div class="flex-1 d-flex flex-row align-items-start user" onclick="displayMessage(${user.id})">
                     <img src="assets/images/profile.png" alt="user icon" height="50" width="50" class="rounded-circle">
                     <div class="d-flex flex-column flex-1 user-body">
                         <h5 class="mb-1">${user.username}</h5>
@@ -81,5 +85,49 @@ if (document.querySelector(".user-list") !== null){
             `
         })
     })
+    .catch(err => console.error(err));
 }
+// Asyncronus return button
+if (document.querySelector("#users-return") !== null) {
+    document.querySelector("#users-return").addEventListener("click", (event) => {
+        event.preventDefault();
+        displayMessage(null);
+    });
+}
+function displayMessage(userId) {
+    console.log(userId);
+
+    // Check if the user list is currently showing and change accordingly
+    if (document.querySelector("#user-display").classList.contains("show")) {
+        // do the changing
+        document.querySelector("#user-display").classList.remove("show");
+        document.querySelector("#user-display").classList.add("hide");
+        document.querySelector("#message-display").classList.remove("hide");
+        document.querySelector("#message-display").classList.add("show");
+    } else {
+        document.querySelector("#user-display").classList.remove("hide");
+        document.querySelector("#user-display").classList.add("show");
+        document.querySelector("#message-display").classList.remove("show");
+        document.querySelector("#message-display").classList.add("hide");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
