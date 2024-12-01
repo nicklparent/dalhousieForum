@@ -102,7 +102,6 @@ function displayMessage(userId) {
     window.messageInterval = setInterval(() => refreshMessages(window.currChatId), 5000);
 }
 function refreshMessages(userId){
-    console.log("HGeklk");
     fetch("api/messages.php", {
         method: 'POST',
         headers: {
@@ -132,7 +131,7 @@ if (document.querySelector("#message-submit") !== null){
 
         const message = document.querySelector("#message-in").value;
         const userId = window.currChatId;
-        fetch("api/messsages.php", {
+        fetch("api/messages.php", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -141,9 +140,11 @@ if (document.querySelector("#message-submit") !== null){
         })
         .then(res => res.json())
         .then(data => {
-
-
+            console.log(data);
+            document.querySelector("#message-in").value = "";
+            refreshMessages(userId);
         })
+        .catch(err => console.log(err));
     })
 }
 

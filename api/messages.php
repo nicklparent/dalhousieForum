@@ -32,8 +32,15 @@ if ($type === "read") {
         echo json_encode(['error' => 'Invalid message']);
         exit;
     }
-    $sql = "INSERT INTO messages (sender_id, receiver_id, content) VALUES ('{$senderId}', '{$id}', '{$message}')";
-    $result = $mydb->insertData('messages', "'sender_id', 'receiver_id', 'content'", "'{$senderId}', '{$id}', '{$message}'");
-    echo json_encode($result);
+    
+    $stmt = $mydb->getDbConn()->prepare("INSERT INTO messages (sender_id, receiver_id, content) VALUES (?, ?, ?)");
+    $stmt->bind_param("iis", $senderId, $id, $message);
+    $result = $stmt->execute();
+    
+    if ($result) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['error' => 'Failed to insert message']);
+    }
 }
 ?>

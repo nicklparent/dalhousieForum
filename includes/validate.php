@@ -11,10 +11,12 @@ class validater {
     }
 
     public function validateMessage($data){
+        $this->valid = true;
+        
         if ($data === ""){
             $this->valid = false;
         }
-        if ($this->injectionCheck($data)){
+        if (!$this->injectionCheck($data)){
             $this->valid = false;
         }
 
@@ -22,13 +24,14 @@ class validater {
     }
 
     public function validatePassword($data){
+        $this->valid = true;
         if ($data === ""){
             $this->valid = false;
         }
-        if (preg_match(self::$regPassword, $data)){
+        if (!preg_match(self::$regPassword, $data)){
             $this->valid = false;
         }
-        if ($this->injectionCheck($data)){
+        if (!$this->injectionCheck($data)){
             $this->valid = false;
         }
         return $this->valid;
