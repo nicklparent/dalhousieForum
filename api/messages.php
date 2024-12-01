@@ -13,7 +13,7 @@ $type = $data['type'];
 $id = $_SESSION["userID"];
 if ($type === "read") {
     $senderId = $data['senderId'];
-    $sql = "SELECT * FROM messages WHERE sender_id = {$senderId} ORDER BY timestamp DESC";
+    $sql = "SELECT * FROM messages WHERE sender_id = {$senderId} ORDER BY timestamp ASC";
     $result = $mydb->getDbConn()->query($sql);
     if (!$result){
         echo json_encode(['error' => 'Database query failed']);

@@ -1,3 +1,4 @@
+
 <?php
-// New-post functionality -- Required feature
+include "templates/post_card.php";
 ?>

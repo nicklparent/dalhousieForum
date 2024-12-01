@@ -61,6 +61,7 @@ main > .container{
     font-weight: bold;
     margin: 2px;
     text-decoration: underline;
+    color: #622c5d;
 }
 
 #user-display{
@@ -110,4 +111,10 @@ main > .container{
 }
 #post-list{
     margin: 1rem;
+}
+
+.post-card{
+    margin: 1rem;
+
+
 }

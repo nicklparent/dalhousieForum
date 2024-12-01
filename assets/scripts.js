@@ -1,4 +1,11 @@
 // JavaScript functionality for Dalhousie Forum
+/*
+This section covers the functionallity of the login and create account system.
+It is made such that it can be done asyncronously
+It first checks if the required elements are loaded then proceeds to add appropriate event listeners
+
+
+ */
 if (document.querySelector("#login-link") !== null){
     document.querySelector("#login-link").addEventListener("click", (event) => {
        event.preventDefault();
@@ -31,29 +38,42 @@ if (document.querySelector("#create-account-link") !== null){
     })
 }
 
+
+/*
+Post showing
+ */
 if (document.querySelector("#post-list") !== null){
 const postList = document.querySelector("#post-list");
-    fetch("api/posts.php")
-        .then(res => res.json())
-        .then(data => {
-            data.forEach(post => {
-                //     add each post element
-                postList.innerHTML +=
-                    `<div class="forum-post d-flex flex-column mb-3 p-2" style="color: aliceblue">
-                    <div class="d-flex justify-content-between border-bottom post-header">
-                        <p class="fw-bold">${post.title}</p>
-                        <p class="fw-light">${post.created_at}</p>
-                    </div>
-                    <div class="d-flex flex-column p-3">
-                        <p class="fw-semibold" style="text-decoration: underline; color: #b6ad9e">@${post.username}</p>
-                        <p>${post.content}</p>
-                    </div>
-                </div>`
-            })
+    fetch("api/posts.php", {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({"type": "read"})
+    })
+    .then(res => res.json())
+    .then(data => {
+        data.forEach(post => {
+            //     add each post element
+            postList.innerHTML +=
+                `<div class="forum-post d-flex flex-column mb-3 p-2" style="color: aliceblue">
+                <div class="d-flex justify-content-between border-bottom post-header">
+                    <p class="fw-bold">${post.title}</p>
+                    <p class="fw-light">${post.created_at}</p>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <p class="fw-semibold" style="text-decoration: underline; color: #b6ad9e">@${post.username}</p>
+                    <p>${post.content}</p>
+                </div>
+            </div>`
         })
-        .catch(err => console.error(err));
+    })
+    .catch(err => console.error(err));
 }
+/*
+This section loads both the users list and the
 
+ */
 if (document.querySelector(".user-list") !== null){
     const userList = document.querySelector(".user-list");
     fetch("api/users.php")
@@ -140,7 +160,6 @@ if (document.querySelector("#message-submit") !== null){
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             document.querySelector("#message-in").value = "";
             refreshMessages(userId);
         })
@@ -148,10 +167,36 @@ if (document.querySelector("#message-submit") !== null){
     })
 }
 
+if (document.querySelector("#new-post-submit") !== null){
+    document.querySelector("#new-post-submit").addEventListener("click", (event) => {
+        event.preventDefault();
+
+        const title = document.querySelector("#title-in").value;
+        const content = document.querySelector("#content-in").value;
+
+        fetch("api/posts.php", {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                "type": "write",
+                "title": title,
+                "content": content
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+
+        })
+        .catch(err => console.error(err));
+    })
+}
 
 
+function refreshPosts(){
 
-
+}
 
 
 

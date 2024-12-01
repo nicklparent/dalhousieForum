@@ -8,6 +8,10 @@
     if (isset($_SESSION['loggedIn']) && isset($_SESSION['userName'])) {
         echo "<h2 class='text-center welcome'>Welcome @{$_SESSION['userName']}</h2>";
     }
+
+    if (isset($_SESSION['loggedIn'])) {
+        include_once "templates/post_card.php";
+    }
     ?>
 
     <div class="d-flex flex-column align-items-center justify-content-center container" id="post-list">
