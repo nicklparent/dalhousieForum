@@ -79,13 +79,7 @@ if (document.querySelector(".user-list") !== null){
     })
     .catch(err => console.error(err));
 }
-// Asyncronus return button
-if (document.querySelector("#users-return") !== null) {
-    document.querySelector("#users-return").addEventListener("click", (event) => {
-        event.preventDefault();
-        displayMessage(null);
-    });
-}
+
 function displayMessage(userId) {
     // Check if the user list is currently showing and change accordingly
     if (document.querySelector("#user-display").classList.contains("show")) {
@@ -101,6 +95,13 @@ function displayMessage(userId) {
         document.querySelector("#message-display").classList.add("hide");
     }
 
+    window.currChatId = userId;
+
+    refreshMessages(userId);
+
+    window.messageInterval = setInterval(() => refreshMessages(window.currChatId), 5000);
+}
+function refreshMessages(userId){
     fetch("api/messages.php", {
         method: 'POST',
         headers: {
@@ -111,15 +112,16 @@ function displayMessage(userId) {
     .then(res => res.json())
     .then(data => {
         console.log(data)
-        // const messageList = document.querySelector(".message-list");
-        // data.forEach(message => {
-        //     messageList.innerHTML += `
-        //     <div class="message">
-        //       <p class="message-content">${message.content}</p>
-        //       <p class="fs-xs">${message.timestamp}</p>
-        //     </div>
-        // `
-        // })
+        const messageList = document.querySelector(".message-list");
+        messageList.innerHTML = ``;
+        data.forEach(message => {
+            messageList.innerHTML += `
+            <div class="message">
+              <p class="message-content">${message.content}</p>
+              <p class="timestamp">${message.timestamp}</p>
+            </div>
+        `
+        })
     })
     .catch(err => console.error(err))
 }

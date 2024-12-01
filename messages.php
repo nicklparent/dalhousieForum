@@ -18,8 +18,8 @@ require_once "templates/header.php";
 </div>
 
 <div class="hide" id="message-display">
-    <div class="message-list d-flex flex-column container" style="display: none;">
-        <a class="btn btn-secondary" id="users-return"><p>Back To Users</p></a>
+    <div class="message-list d-flex flex-column container flex-1" style="display: none;">
+
     </div>
 </div>
 <?php

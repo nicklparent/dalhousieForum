@@ -73,13 +73,22 @@
     margin-bottom: 20px;
     box-shadow: 20px 20px #1c2d44;
 }
-
+.message-list{
+    padding-bottom: 2%;
+}
 .message{
     flex: 1;
     margin-right: 5%;
     border: 2px solid navy;
-    border-radius: 25%;
+    border-radius: 1rem;
+    background: #5082e8;
+    padding: 2.5% 1% 2px 1%;
+    margin-bottom: 1.5%;
 }
 .message-content{
-    font-size: medium;
+    font-size: large;
+    color: white;
+}
+.timestamp{
+    font-size: 10px;
 }
