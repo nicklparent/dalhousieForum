@@ -1,3 +1,13 @@
+body{
+    height: 100%;
+    width: 100vw;
+
+}
+
+main > .container{
+    padding: 4% 2%;
+    border-radius: 1rem;
+}
 .pg-header, .pg-footer{
     background: rgba(57,57,56,0.93);
 }
@@ -53,11 +63,8 @@
     text-decoration: underline;
 }
 
-.message-list{
-    height: 100px;
-}
-.user-list{
-    background: rgba(47,47,94,0.93);
+#user-display{
+    background: #404141;
 }
 .user{
     padding: 1%;
@@ -72,6 +79,10 @@
 .user:hover{
     margin-bottom: 20px;
     box-shadow: 20px 20px #1c2d44;
+}
+.message-display{
+    margin-bottom: 2%;
+    flex: 1;
 }
 .message-list{
     padding-bottom: 2%;
@@ -91,4 +102,12 @@
 }
 .timestamp{
     font-size: 10px;
+}
+#message-in{
+    flex: 1;
+    padding: 2%;
+    height: 7vh;
+}
+#post-list{
+    margin: 1rem;
 }

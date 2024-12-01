@@ -1,6 +1,3 @@
-<?php
-// Footer functionality
-?>
 
 </main>
 <footer class="d-flex flex-wrap justify-content-between align-items-center p-2 border-top bg-gradient pg-footer">

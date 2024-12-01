@@ -12,32 +12,31 @@ function cleanData($string){
     return $string;
 }
 session_start();
-
+require_once "validate.php";
 require_once "db_connect.php";
 
 //Constants
 $regPassword = "/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!\-@#$%^&*_{}+\\\;:.,\[\]()~`]).{8,}$/";
-$regUsename = "/^[a-zA-Z0-9]+$/";
+$regUsername = "/^[a-zA-Z0-9]+$/";
 
 $mydb = new DB();
+$validater = new validater();
 
 $username = cleanData($_POST['userName']);
 $password = cleanData($_POST['password']);
 $passwordConfirm = cleanData($_POST["password-confirm"]);
 
+if (!($validater->validateUsername($username) || $validater->validatePassword($password) || $validater->validatePassword($passwordConfirm))) {
+    header("Location: ../index.php?invalidPasssword", true, 302);
+    exit;
+}
+
 $created = false;
 
 if ($username && $password) {
-    if (preg_match($regUsername, $username)) {
-        header("Location: ../index.php?invalidUsername", true, 302);
-        die();
-    }
+
     $usercheck = $mydb->selectData("username, id", "users", "username = '{$username}'");
     $usercheck = json_decode($usercheck, true);
-    if (!preg_match($regPassword, $password)) {
-        header("Location: ../index.php?invalidPassword", true, 302);
-        die();
-    }
     if (isset($usercheck["Error"])) {
         if ($usercheck["Error"] === "No results found") {
             if ($password === $passwordConfirm) {

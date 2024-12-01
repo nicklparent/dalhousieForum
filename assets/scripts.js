@@ -70,7 +70,7 @@ if (document.querySelector(".user-list") !== null){
                 <div class="flex-1 d-flex flex-row align-items-start user" onclick="displayMessage(${user.id})">
                     <img src="assets/images/profile.png" alt="user icon" height="50" width="50" class="rounded-circle">
                     <div class="d-flex flex-column flex-1 user-body">
-                        <h5 class="mb-1">${user.username}</h5>
+                        <h5 class="mb-1">@${user.username}</h5>
                         <p class="mb-0">${content}</p>
                     </div>
                 </div>
@@ -102,16 +102,16 @@ function displayMessage(userId) {
     window.messageInterval = setInterval(() => refreshMessages(window.currChatId), 5000);
 }
 function refreshMessages(userId){
+    console.log("HGeklk");
     fetch("api/messages.php", {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({"senderId": userId})
+        body: JSON.stringify({"senderId": userId, "type": "read"})
     })
     .then(res => res.json())
     .then(data => {
-        console.log(data)
         const messageList = document.querySelector(".message-list");
         messageList.innerHTML = ``;
         data.forEach(message => {
@@ -126,7 +126,26 @@ function refreshMessages(userId){
     .catch(err => console.error(err))
 }
 
+if (document.querySelector("#message-submit") !== null){
+    document.querySelector("#message-submit").addEventListener("click", (event) => {
+        event.preventDefault();
 
+        const message = document.querySelector("#message-in").value;
+        const userId = window.currChatId;
+        fetch("api/messsages.php", {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({"type": "write", "senderId": userId, "content": message})
+        })
+        .then(res => res.json())
+        .then(data => {
+
+
+        })
+    })
+}
 
 
 
