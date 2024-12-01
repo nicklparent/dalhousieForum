@@ -43,32 +43,9 @@ if (document.querySelector("#create-account-link") !== null){
 Post showing
  */
 if (document.querySelector("#post-list") !== null){
-const postList = document.querySelector("#post-list");
-    fetch("api/posts.php", {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({"type": "read"})
-    })
-    .then(res => res.json())
-    .then(data => {
-        data.forEach(post => {
-            //     add each post element
-            postList.innerHTML +=
-                `<div class="forum-post d-flex flex-column mb-3 p-2" style="color: aliceblue">
-                <div class="d-flex justify-content-between border-bottom post-header">
-                    <p class="fw-bold">${post.title}</p>
-                    <p class="fw-light">${post.created_at}</p>
-                </div>
-                <div class="d-flex flex-column p-3">
-                    <p class="fw-semibold" style="text-decoration: underline; color: #b6ad9e">@${post.username}</p>
-                    <p>${post.content}</p>
-                </div>
-            </div>`
-        })
-    })
-    .catch(err => console.error(err));
+    refreshPosts();
+
+    setInterval(() => refreshPosts(), 5000);
 }
 /*
 This section loads both the users list and the
@@ -195,7 +172,33 @@ if (document.querySelector("#new-post-submit") !== null){
 
 
 function refreshPosts(){
-
+    const postList = document.querySelector("#post-list");
+    fetch("api/posts.php", {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({"type": "read"})
+    })
+        .then(res => res.json())
+        .then(data => {
+            postList.innerHTML = '';
+            data.forEach(post => {
+                //     add each post element
+                postList.innerHTML +=
+                    `<div class="forum-post d-flex flex-column mb-3 p-2" style="color: aliceblue">
+                <div class="d-flex justify-content-between border-bottom post-header">
+                    <p class="fw-bold">${post.title}</p>
+                    <p class="fw-light">${post.created_at}</p>
+                </div>
+                <div class="d-flex flex-column p-3">
+                    <p class="fw-semibold" style="text-decoration: underline; color: #b6ad9e">@${post.username}</p>
+                    <p>${post.content}</p>
+                </div>
+            </div>`
+            })
+        })
+        .catch(err => console.error(err));
 }
 
 
