@@ -1,4 +1,4 @@
-let postInterval;
+let postInterval = setInterval(() => refreshPosts(), 5000);
 
 
 
@@ -200,7 +200,12 @@ function refreshPosts(){
     })
         .then(res => res.json())
         .then(data => {
-            const username = document.querySelector(".welcome-name").textContent.trim();
+            let username;
+            if (document.querySelector(".welcome-name") !== null){
+                username = document.querySelector(".welcome-name").textContent.trim()
+            } else {
+                username = '';
+            }
             postList.innerHTML = '';
             data.forEach(post => {
                 //     add each post element
