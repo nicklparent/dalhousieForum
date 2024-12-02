@@ -6,12 +6,11 @@
 
     <?php
     if (isset($_SESSION['loggedIn']) && isset($_SESSION['userName'])) {
-        echo "<h2 class='text-center welcome'>Welcome @{$_SESSION['userName']}</h2>";
+        echo "<h2 class='text-center welcome'>Welcome<p class='welcome-name'>{$_SESSION['userName']}</p></h2>";
     }
 
     if (isset($_SESSION['loggedIn'])) {
         include_once "templates/post_card.php";
-        print_r($_SESSION);
     }
     ?>
 

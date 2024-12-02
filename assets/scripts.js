@@ -164,15 +164,18 @@ if (document.querySelector("#new-post-submit") !== null){
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             if (data["Error"] !== null){
-                console.log("error");
+                refreshPosts();
                 document.querySelector(".error").innerText = "Could Not Submit Post";
+                document.querySelector(".error").classList.remove("hide");
+                document.querySelector(".error").classList.add("show");
             } else {
+                document.querySelector(".error").innerText = "";
+                document.querySelector(".error").classList.remove("show");
+                document.querySelector(".error").classList.add("hide");
                 document.querySelector("#title-in").value = "";
                 document.querySelector("#content-in").value = "";
-                // Refresh the posts list
-                refreshPosts();
+
             }
         })
         .catch(err => {
@@ -194,9 +197,17 @@ function refreshPosts(){
     })
         .then(res => res.json())
         .then(data => {
+            const username = document.querySelector(".welcome-name").textContent.trim();
             postList.innerHTML = '';
             data.forEach(post => {
                 //     add each post element
+                const ownsPost = post.username === username;
+                const editButton = ownsPost ? `
+                <div>
+                    <button class="btn btn-light" onclick="editPost(${post.id})">Edit</button>
+                    <button class="btn btn-light" onclick="deletePost(${post.id})">Delete</button>
+                </div>
+                ` : '';
                 postList.innerHTML +=
                     `<div class="forum-post d-flex flex-column mb-3 p-2" style="color: aliceblue">
                 <div class="d-flex justify-content-between border-bottom post-header">
@@ -207,13 +218,16 @@ function refreshPosts(){
                     <p class="fw-semibold" style="text-decoration: underline; color: #b6ad9e">@${post.username}</p>
                     <p>${post.content}</p>
                 </div>
+                ${editButton}
             </div>`
             })
         })
         .catch(err => console.error(err));
 }
 
+function editPost(postId){
 
+}
 
 
 
