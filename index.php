@@ -11,6 +11,7 @@
 
     if (isset($_SESSION['loggedIn'])) {
         include_once "templates/post_card.php";
+        print_r($_SESSION);
     }
     ?>
 

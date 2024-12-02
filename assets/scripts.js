@@ -154,19 +154,31 @@ if (document.querySelector("#new-post-submit") !== null){
         fetch("api/posts.php", {
             method: 'POST',
             headers: {
-                "Content-type": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                "type": "write",
+                "type": "write", 
                 "title": title,
                 "content": content
             })
         })
         .then(res => res.json())
         .then(data => {
-
+            console.log(data);
+            if (data["Error"] !== null){
+                console.log("error");
+                document.querySelector(".error").innerText = "Could Not Submit Post";
+            } else {
+                document.querySelector("#title-in").value = "";
+                document.querySelector("#content-in").value = "";
+                // Refresh the posts list
+                refreshPosts();
+            }
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+            console.error(err);
+            document.querySelector(".error").innerText = "Error submitting post";
+        });
     })
 }
 

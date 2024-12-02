@@ -44,7 +44,7 @@ if ($username && $password) {
                 $insert = $mydb->getDbConn()->query("INSERT INTO users (username, password) VALUES ('{$username}', '$hashedPassword')");
                 $_SESSION['loggedIn'] = true;
                 $_SESSION["userName"] = $username;
-                $_SESSION["userID"] = $usercheck["id"];
+                $_SESSION["userID"] = $mydb->selectData("id", "users", "username = '{$username}'")[0]["id"];
                 $created = true;
             } else {
                 header("Location: ../index.php?invalidPassword", true, 302);

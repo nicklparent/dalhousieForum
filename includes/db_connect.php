@@ -10,10 +10,13 @@ class DB {
         }
     }
 
-    public function selectData($parameters, $table, $conditions = null){
+    public function selectData($parameters, $table, $conditions = null, $order = null){
         $query = "SELECT $parameters FROM $table";
         if ($conditions) {
             $query .= " WHERE $conditions";
+        }
+        if ($order) {
+            $query .= " ORDER BY $order";
         }
         $sql = $this->dbConn->query($query);
         if (!$sql){

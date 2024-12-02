@@ -1,14 +1,15 @@
 <?php
+session_start();
 require "../includes/validate.php";
 require "../includes/db_connect.php";
 $mydb = new DB();
 $validater = new validater();
 
 $data = json_decode(file_get_contents("php://input"), true);
-header('Content-type: application/json');
+header('Content-Type: application/json');
 
 if ($data["type"] === "read"){
-    $posts = $mydb->selectData("*", "posts INNER JOIN users ON posts.user_id = users.id");
+    $posts = $mydb->selectData("*", "posts INNER JOIN users ON posts.user_id = users.id", null, "created_at DESC");
     echo json_encode($posts);
     die();
 } else if ($data["type"] === "write"){
@@ -21,15 +22,16 @@ if ($data["type"] === "read"){
         die();
     }
 
-    $stmt = $mydb->getDbConn()->prepare("INSERT INTO posts (user_id, title, content) VALUES (?, ?, ?)");
-    $stmt->bind_param("iss", $user_id, $title, $content);
-    $result = $stmt->execute();
+    $sql = "INSERT INTO posts (user_id, title, content) VALUES ('$user_id', '$title', '$content')";
+    $result = $mydb->getDbConn()->query($sql);
 
     if ($result){
         echo json_encode(["Success" => "Post created."]);
     } else {
         echo json_encode(["Error" => "Error creating post."]);
     }
+} else {
+    echo json_encode(["Error" => "Unauthorized request."]);
 }
 
 ?>
