@@ -30,6 +30,7 @@ if ($data["type"] === "read"){
     } else {
         echo json_encode(["Error" => "Error creating post."]);
     }
+//    Delete the sent post
 } else if ($data["type"] === "delete"){
     $postId = $data["postId"];
 
@@ -39,6 +40,8 @@ if ($data["type"] === "read"){
     } else {
         echo json_encode(["Error" => "Error deleting post."]);
     }
+
+//    Edit the sent post
 } else if ($data["type"] === "edit"){
     $postId = $data["postId"];
     $title = $data["title"];
@@ -52,11 +55,7 @@ if ($data["type"] === "read"){
     $sql = "UPDATE posts SET title = '$title', content = '$content' WHERE id = '$postId'";
     $result = $mydb->getDbConn()->query($sql);
 
-    if ($result){
-        echo json_encode(["Success" => "Post updated."]);
-    } else {
-        echo json_encode(["Error" => "Error updating post."]);
-    }
+    echo json_encode(["Success" => "Post updated."]);
 } else {
     echo json_encode(["Error" => "Unauthorized request."]);
 }

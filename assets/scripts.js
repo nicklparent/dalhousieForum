@@ -1,9 +1,12 @@
+let postInterval;
+
+
+
 // JavaScript functionality for Dalhousie Forum
 /*
 This section covers the functionallity of the login and create account system.
 It is made such that it can be done asyncronously
 It first checks if the required elements are loaded then proceeds to add appropriate event listeners
-
 
  */
 if (document.querySelector("#login-link") !== null){
@@ -45,7 +48,7 @@ Post showing
 if (document.querySelector("#post-list") !== null){
     refreshPosts();
 
-    setInterval(() => refreshPosts(), 5000);
+    postInterval = setInterval(() => refreshPosts(), 5000);
 }
 /*
 This section loads both the users list and the
@@ -200,7 +203,6 @@ function refreshPosts(){
             const username = document.querySelector(".welcome-name").textContent.trim();
             postList.innerHTML = '';
             data.forEach(post => {
-                console.log(post)
                 //     add each post element
                 const ownsPost = post.username === username;
                 const editButton = ownsPost ? `
@@ -210,28 +212,63 @@ function refreshPosts(){
                 </div>
                 ` : '';
                 postList.innerHTML +=
-                    `<div class="forum-post d-flex flex-column mb-3 p-2" style="color: aliceblue">
-                <div class="d-flex justify-content-between border-bottom post-header">
-                    <p class="fw-bold">${post.title}</p>
-                    <p class="fw-light">${post.created_at}</p>
-                </div>
-                <div class="d-flex flex-column p-3">
-                    <p class="fw-semibold" style="text-decoration: underline; color: #b6ad9e">@${post.username}</p>
-                    <p>${post.content}</p>
-                </div>
-                ${editButton}
-            </div>`
+                `<div class="forum-post d-flex flex-column mb-3 p-2" style="color: aliceblue" id="post-${post.id}">
+                    <div class="d-flex justify-content-between border-bottom post-header">
+                        <p class="fw-bold">${post.title}</p>
+                        <p class="fw-light">${post.created_at}</p>
+                    </div>
+                    <div class="d-flex flex-column p-3">
+                        <p class="fw-semibold" style="text-decoration: underline; color: #b6ad9e">@${post.username}</p>
+                        <p>${post.content}</p>
+                    </div>
+                    <div class="edit-btns hide">
+                        <input type="text" class="form-control mb-2" value="${post.title}" id="edit-title-${post.id}">
+                        <textarea class="form-control mb-2" id="edit-content-${post.id}">${post.content}</textarea>
+                        <button class="btn btn-success" onclick="submitEdit(${post.id})">Save</button>
+                        <button class="btn btn-secondary" onclick="cancelEdit(${post.id})">Cancel</button>
+                        <p class="error error-edit hide"></p>
+                    </div>
+                    ${editButton}
+                </div>`
             })
         })
         .catch(err => console.error(err));
 }
 
-function editPost(postId){
-
+function submitEdit(postId){
+    const title = document.querySelector(`#edit-title-${postId}`).value;
+    const content = document.querySelector(`#edit-content-${postId}`).value;
+    
+    fetch("api/posts.php", {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            "type": "edit",
+            "postId": postId,
+            "title": title,
+            "content": content,
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.Success) {
+            document.querySelector(".error-edit").innerText = ""
+            document.querySelector(".error-edit").classList.remove("show");
+            document.querySelector(".error-edit").classList.add("hide");
+            refreshPosts();
+            postInterval = setInterval(() => refreshPosts(), 5000);
+        } else {
+            document.querySelector(".error-edit").innerText = "Could Not Edit Post."
+            document.querySelector(".error-edit").classList.remove("hide");
+            document.querySelector(".error-edit").classList.add("show");
+        }
+    })
+    .catch(err => console.error(err));
 }
 
 function deletePost(postId){
-    console.log(postId);
     fetch("api/posts.php", {
         method: 'POST',
         headers: {
@@ -243,12 +280,27 @@ function deletePost(postId){
         })
     })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => refreshPosts())
         .catch(err => console.log(err))
 }
 
+function editPost(postId) {
+    clearInterval(postInterval);
+    // Show edit form and hide post content
+    const postElement = document.querySelector(`#post-${postId}`);
+    postElement.querySelector('.edit-btns').classList.remove('hide');
+    postElement.querySelector('.post-header').classList.add('hide');
+    postElement.querySelector('.d-flex.flex-column.p-3').classList.add('hide');
+}
 
-
+function cancelEdit(postId) {
+    // Hide edit form and show post content
+    const postElement = document.querySelector(`#post-${postId}`);
+    postElement.querySelector('.edit-btns').classList.add('hide');
+    postElement.querySelector('.post-header').classList.remove('hide');
+    postElement.querySelector('.d-flex.flex-column.p-3').classList.remove('hide');
+    postInterval = setInterval(() => refreshPosts(), 5000);
+}
 
 
 
