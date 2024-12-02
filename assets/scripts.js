@@ -167,9 +167,8 @@ if (document.querySelector("#new-post-submit") !== null){
         })
         .then(res => res.json())
         .then(data => {
-            if (data["Error"] !== null){
-                refreshPosts();
-                document.querySelector(".error").innerText = "Could Not Submit Post";
+            if (data.Error) {
+                document.querySelector(".error").innerText = data.Error;
                 document.querySelector(".error").classList.remove("hide");
                 document.querySelector(".error").classList.add("show");
             } else {
@@ -178,7 +177,8 @@ if (document.querySelector("#new-post-submit") !== null){
                 document.querySelector(".error").classList.add("hide");
                 document.querySelector("#title-in").value = "";
                 document.querySelector("#content-in").value = "";
-
+                refreshPosts();
+                alert("Post Submitted Successfully.");
             }
         })
         .catch(err => {
@@ -225,7 +225,7 @@ function refreshPosts(){
                         <input type="text" class="form-control mb-2" value="${post.title}" id="edit-title-${post.id}">
                         <textarea class="form-control mb-2" id="edit-content-${post.id}">${post.content}</textarea>
                         <button class="btn btn-success" onclick="submitEdit(${post.id})">Save</button>
-                        <button class="btn btn-secondary" onclick="cancelEdit(${post.id})">Cancel</button>
+                        <button class="btn btn-warning" onclick="cancelEdit(${post.id})">Cancel</button>
                         <p class="error error-edit hide"></p>
                     </div>
                     ${editButton}
@@ -280,7 +280,11 @@ function deletePost(postId){
         })
     })
         .then(res => res.json())
-        .then(data => refreshPosts())
+        .then(data => {
+            alert("Post Deleted Successfully.")
+            refreshPosts();
+
+        })
         .catch(err => console.log(err))
 }
 
@@ -301,9 +305,3 @@ function cancelEdit(postId) {
     postElement.querySelector('.d-flex.flex-column.p-3').classList.remove('hide');
     postInterval = setInterval(() => refreshPosts(), 5000);
 }
-
-
-
-
-
-
