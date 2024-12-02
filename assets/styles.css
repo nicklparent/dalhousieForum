@@ -123,3 +123,7 @@ main > .container{
     background: darkred;
     font-weight: bolder;
 }
+.control-btns{
+    display: flex;
+    justify-content: space-between;
+}

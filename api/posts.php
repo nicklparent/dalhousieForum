@@ -9,7 +9,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 header('Content-Type: application/json');
 
 if ($data["type"] === "read"){
-    $posts = $mydb->selectData("*", "posts INNER JOIN users ON posts.user_id = users.id", null, "created_at DESC");
+    $posts = $mydb->selectData("posts.*, users.username", "posts INNER JOIN users ON posts.user_id = users.id", null, "created_at DESC");
     echo json_encode($posts);
     die();
 } else if ($data["type"] === "write"){
@@ -29,6 +29,33 @@ if ($data["type"] === "read"){
         echo json_encode(["Success" => "Post created."]);
     } else {
         echo json_encode(["Error" => "Error creating post."]);
+    }
+} else if ($data["type"] === "delete"){
+    $postId = $data["postId"];
+
+    $result = $mydb->getDbConn()->query("DELETE FROM posts WHERE id = {$postId}");
+    if ($result){
+        echo json_encode(["Success" => "Post deleted."]);
+    } else {
+        echo json_encode(["Error" => "Error deleting post."]);
+    }
+} else if ($data["type"] === "edit"){
+    $postId = $data["postId"];
+    $title = $data["title"];
+    $content = $data["content"];
+    $user_id = $_SESSION["userID"];
+
+    if (!$validater->validateMessage($title) || !$validater->validateMessage($content)){
+        echo json_encode(["Error" => "Unauthorized request."]);
+        die();
+    }
+    $sql = "UPDATE posts SET title = '$title', content = '$content' WHERE id = '$postId'";
+    $result = $mydb->getDbConn()->query($sql);
+
+    if ($result){
+        echo json_encode(["Success" => "Post updated."]);
+    } else {
+        echo json_encode(["Error" => "Error updating post."]);
     }
 } else {
     echo json_encode(["Error" => "Unauthorized request."]);

@@ -200,12 +200,13 @@ function refreshPosts(){
             const username = document.querySelector(".welcome-name").textContent.trim();
             postList.innerHTML = '';
             data.forEach(post => {
+                console.log(post)
                 //     add each post element
                 const ownsPost = post.username === username;
                 const editButton = ownsPost ? `
-                <div>
-                    <button class="btn btn-light" onclick="editPost(${post.id})">Edit</button>
-                    <button class="btn btn-light" onclick="deletePost(${post.id})">Delete</button>
+                <div class="control-btns">
+                    <button class="btn btn-info" onclick="editPost(${post.id})">Edit</button>
+                    <button class="btn btn-danger" onclick="deletePost(${post.id})">Delete</button>
                 </div>
                 ` : '';
                 postList.innerHTML +=
@@ -229,7 +230,22 @@ function editPost(postId){
 
 }
 
-
+function deletePost(postId){
+    console.log(postId);
+    fetch("api/posts.php", {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            "type": "delete",
+            "postId": postId
+        })
+    })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
+}
 
 
 
